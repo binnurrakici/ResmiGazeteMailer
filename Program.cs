@@ -32,7 +32,26 @@ if (config == null)
     Console.WriteLine("Konfigürasyon boş geldi.");
     return;
 }
+// GitHub Secrets / Ortam değişkenlerinden kimlik bilgilerini oku
+var envUser = Environment.GetEnvironmentVariable("SMTP_USER");
+var envPass = Environment.GetEnvironmentVariable("SMTP_PASSWORD");
 
+if (!string.IsNullOrWhiteSpace(envUser))
+{
+    config.Smtp.User = envUser;
+    config.Smtp.From = envUser;
+    
+    // Eğer alıcı listesi boşsa varsayılan olarak kendi adresinize gönderin
+    if (config.Smtp.To == null || config.Smtp.To.Count == 0 || string.IsNullOrWhiteSpace(config.Smtp.To[0]))
+    {
+        config.Smtp.To = new List<string> { envUser };
+    }
+}
+
+if (!string.IsNullOrWhiteSpace(envPass))
+{
+    config.Smtp.Password = envPass;
+}
 try
 {
     Console.WriteLine("Günün Resmî Gazete içeriği alınıyor...");
