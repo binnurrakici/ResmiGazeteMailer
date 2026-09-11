@@ -1,0 +1,4 @@
+bin/
+obj/
+sent_history.json
+.DS_Store
