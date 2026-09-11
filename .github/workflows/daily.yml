@@ -1,0 +1,35 @@
+name: Gunluk Resmi Gazete Mailer
+
+on:
+  schedule:
+    - cron: '30 4 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-mailer:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kodu İndir
+        uses: actions/checkout@v4
+
+      - name: .NET Kurulumu
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Bağımlılıkları Yükle
+        run: dotnet restore
+
+      - name: Projeyi Derle
+        run: dotnet build --configuration Release
+
+      - name: Playwright Tarayıcılarını Kur
+        run: |
+          pwsh bin/Release/net8.0/playwright.ps1 install --with-deps chromium
+
+      - name: Görevi Çalıştır
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        run: dotnet run --configuration Release --no-build
