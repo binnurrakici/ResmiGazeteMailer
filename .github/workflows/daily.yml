@@ -24,9 +24,10 @@ jobs:
       - name: Projeyi Derle
         run: dotnet build --configuration Release
 
-      - name: Playwright Tarayıcılarını Kur
+      - name: Playwright CLI ve Chromium Kur
         run: |
-          pwsh bin/Release/net8.0/playwright.ps1 install --with-deps chromium
+          dotnet tool install --global Microsoft.Playwright.CLI
+          playwright install --with-deps chromium
 
       - name: Görevi Çalıştır
         env:
