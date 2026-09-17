@@ -100,7 +100,7 @@ static string GenerateHtmlEmail(string tarih, List<Section> sections)
                 <td style=""background: linear-gradient(135deg, #bf2b1b 0%, #ffffff 100%); padding: 36px 32px; text-align: left;"">
                   <span style=""display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #ea8a8a; margin-bottom: 8px;"">Günlük Bülten</span>
                   <h1 style=""margin: 0; color: #000000; font-size: 24px; font-weight: 700; letter-spacing: -0.5px;"">T.C. Resmî Gazete</h1>
-                  <p style=""margin: 8px 0 0; color: #fbfdffc2; font-size: 14px;"">{tarih}</p>
+                  <p style=""margin: 8px 0 0; color: #000000; font-size: 14px;"">{tarih}</p>
                 </td>
               </tr>
 
